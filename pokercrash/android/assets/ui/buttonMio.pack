@@ -1,0 +1,21 @@
+
+ButtonMio.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Button_DOWN
+  rotate: false
+  xy: 0, 0
+  size: 93, 47
+  split: 38, 20, 15, 15
+  orig: 93, 47
+  offset: 0, 0
+  index: -1
+Button_UP
+  rotate: false
+  xy: 93, 0
+  size: 93, 47
+  split: 28, 28, 14, 16
+  orig: 93, 47
+  offset: 0, 0
+  index: -1
