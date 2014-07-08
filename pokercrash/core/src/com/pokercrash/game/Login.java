@@ -1,10 +1,10 @@
 package com.pokercrash.game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -17,6 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Login implements Screen {
 
@@ -26,7 +28,6 @@ public class Login implements Screen {
 	private Table table;
 	private TextButton buttonPlay, buttonExit;
 	private BitmapFont white, black; 
-	private Label heading;
 	private Pokercrash game;
 	
 	public Login(Pokercrash game) {
@@ -50,8 +51,12 @@ public class Login implements Screen {
 
 	@Override
 	public void show() {
+		float w = Gdx.graphics.getWidth();
+		float h = Gdx.graphics.getHeight();
+		float ancho=400;
+		stage = new Stage(new ScreenViewport(new OrthographicCamera(ancho, ancho*h/w)));
+
 		
-		stage = new Stage();
 		
 		Gdx.input.setInputProcessor(stage);
 		
@@ -59,7 +64,8 @@ public class Login implements Screen {
 		skin = new Skin(atlas);
 		 	    
 		table = new Table(skin);
-		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		table.setFillParent(true);
+//		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		white = new BitmapFont(Gdx.files.internal("fnt/comic_white.fnt"),false);
 	    black = new BitmapFont(Gdx.files.internal("fnt/comic_black.fnt"),false);
@@ -113,6 +119,9 @@ public class Login implements Screen {
 		
 		table.debug();              												 // borrar cuando se termine
 		stage.addActor(table);
+		
+		
+
 
 	}
 

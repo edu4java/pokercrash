@@ -13,12 +13,13 @@ public class Pokercrash extends Game {
 	SpriteBatch batch;
 	Texture img;
 	private Screen lobby;
-	private HashMap<Integer,TableScreen> tableScreens;
+	private HashMap<Integer,TableScreen> tableScreens= new HashMap<Integer, TableScreen>();
 	private Model model;
 
 
 	@Override
 	public void create() {
+		model = new Model();
 		setScreen(new Login(this));
 	}
 
