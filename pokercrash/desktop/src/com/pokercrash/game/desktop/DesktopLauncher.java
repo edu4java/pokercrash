@@ -14,7 +14,7 @@ public class DesktopLauncher {
 			Settings settings = new Settings();
 //			settings.maxWidth = 1024;
 //			settings.maxHeight = 1024;
-			settings.debug = true;
+//			settings.debug = true;
 			TexturePacker2.process(settings, "tema",
 			"../android/assets/images",
 			"pokercrash.pack");

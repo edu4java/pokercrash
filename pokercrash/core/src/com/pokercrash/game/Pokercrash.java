@@ -19,6 +19,7 @@ public class Pokercrash extends Game {
 
 	@Override
 	public void create() {
+		Assets.load();
 		model = new Model();
 		setScreen(new Login(this));
 	}
