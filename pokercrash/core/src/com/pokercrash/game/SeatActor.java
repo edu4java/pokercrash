@@ -13,25 +13,30 @@ public class SeatActor extends Actor {
 	private TextureRegion textureRegion;
 	private String playerName ="Lugar Vacio";
 	private String stack="$ 00.00";
-	private boolean empty= true;
+	boolean empty= true;
+	private int seatPos;
 
-	public SeatActor(TextureRegion textureRegion) {
+	public int getSeatPos() {
+		return seatPos;
+	}
+
+
+	public SeatActor(int seatPos, TextureRegion textureRegion) {
+		this.seatPos = seatPos;
 		this.textureRegion = textureRegion;
-
+		setBounds(0, 0, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
 	}
 	
 
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
-		batch.draw(textureRegion, getX(), getY());
-		Assets.whiteFont.draw(batch,playerName, getX()+5, getY()+30);
-		Assets.whiteFont.draw(batch, stack, getX()+5, getY());
-//		if (!empty) {
-//			batch.draw(textureRegion, getX(), getY());
-//			Assets.whiteFont.draw(batch,playerName, getX()+5, getY()+30);
-//			Assets.whiteFont.draw(batch, stack, getX()+5, getY());
-//		}
+	
+		if (!empty) {
+			batch.draw(textureRegion, getX(), getY());
+			Assets.whiteFont.draw(batch,playerName, getX()+5, getY()+30);
+			Assets.whiteFont.draw(batch, stack, getX()+5, getY());
+		}
 	
 	}
 
@@ -51,5 +56,4 @@ public class SeatActor extends Actor {
 		this.stack = stack;
 	}
 
-	
 }

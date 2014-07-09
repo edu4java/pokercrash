@@ -9,11 +9,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.pokercrash.game.model.User;
 
 public class TableScreen implements Screen {
 
@@ -41,21 +45,27 @@ public class TableScreen implements Screen {
 		stage.addActor(background);
 		seats = new ArrayList<SeatActor>();
 		for (int i = 0; i < 9; i++) {
-			SeatActor seat = new SeatActor(Assets.player);
+			final SeatActor seat = new SeatActor(i,Assets.player);
 			seat.setPosition(SEAT_POS[i][0], SEAT_POS[i][1]);
-			seat.addListener(new EventListener() {
-				
+			seat.addListener(new InputListener(){
 				@Override
-				public boolean handle(Event event) {
-					System.out.println("skdsndk");
+				public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+					System.out.println("touch");
+					seat.empty = false;
+					seat.setTouchable(Touchable.disabled);
+					if (pokercrash.getModel().trySeating(seat.getSeatPos())) {
+						seat.setPlayerName(pokercrash.getModel().getUser().getNickName());
+						seat.setStack("$10");// TODO popup
+					};
+					
+					User user = pokercrash.getModel().getUser();
+
 					return false;
 				}
+				
 			});
 			stage.addActor(seat);
 			seats.add(seat);
-			
-			
-			
 		}
 
 	}

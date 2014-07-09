@@ -8,4 +8,12 @@ public class Model {
 		}
 		return r;
 	}
+
+	public User getUser() {
+		return new User("Juancho","pass",100);
+	}
+
+	public boolean trySeating(int seatPos) {
+		return true;
+	}
 }
