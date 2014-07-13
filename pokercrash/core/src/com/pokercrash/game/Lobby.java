@@ -55,7 +55,7 @@ public class Lobby implements Screen {
 		Label headline = new Label(HEAD_TITLE, skin2);
 
 		list = new List<GameTable>(skin2);
-		list.setItems(pokercrash.getModel().getGameTable());
+		list.setItems(pokercrash.getService().getGameTables());
 		ScrollPane scrollList = new ScrollPane(list);
 		
 		TextButton buttonExit = new TextButton("Exit", skin2);

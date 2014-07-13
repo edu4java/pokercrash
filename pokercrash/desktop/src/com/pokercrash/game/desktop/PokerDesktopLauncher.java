@@ -7,7 +7,7 @@ import com.badlogic.gdx.tools.imagepacker.TexturePacker2.Settings;
 import com.pokercrash.game.Pokercrash;
 
 
-public class DesktopLauncher {
+public class PokerDesktopLauncher {
 	public static void main (String[] arg) {
 		boolean rebuildAtlas=true;
 		if (rebuildAtlas) {

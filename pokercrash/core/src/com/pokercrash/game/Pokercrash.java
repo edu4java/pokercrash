@@ -6,7 +6,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.pokercrash.game.model.Model;
+import com.pokercrash.game.model.Services;
 
 public class Pokercrash extends Game {
 	public static final String TITLE = "Texas Holdem poker", VERSION = "0.0.primera";
@@ -14,13 +14,13 @@ public class Pokercrash extends Game {
 	Texture img;
 	private Screen lobby;
 	private HashMap<Integer,TableScreen> tableScreens= new HashMap<Integer, TableScreen>();
-	private Model model;
+	private Services service;
 
 
 	@Override
 	public void create() {
 		Assets.load();
-		model = new Model();
+		service = new Services();
 		setScreen(new Login(this));
 	}
 
@@ -33,13 +33,14 @@ public class Pokercrash extends Game {
 
 	public void gotoMesa(int idGameTable) {
 		if (!tableScreens.containsKey(idGameTable)) {
-			tableScreens.put(idGameTable, new TableScreen(this));
+			tableScreens.put(idGameTable, new TableScreen(this,idGameTable));
 		}
 		setScreen(tableScreens.get(idGameTable));
 	}
+	
 
-	public Model getModel() {
-		return model;
+	public Services getService() {
+		return service;
 	}
 
 }
