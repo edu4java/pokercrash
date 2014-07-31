@@ -2,7 +2,7 @@ package com.pokercrash.game.model;
 
 import java.util.ArrayList;
 
-public class Services {
+public class Services implements IService {
 	
 	User user;
 	private int seatPos;
@@ -10,10 +10,18 @@ public class Services {
 
 	
 	
+	/* (non-Javadoc)
+	 * @see com.pokercrash.game.model.IService#addTableChangeListener(com.pokercrash.game.model.TableChangeListener)
+	 */
+	@Override
 	public void addTableChangeListener(TableChangeListener tableChangeListener) {
 		tableChangeListeners.add(tableChangeListener);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.pokercrash.game.model.IService#removeTableChangeListener(com.pokercrash.game.model.TableChangeListener)
+	 */
+	@Override
 	public void removeTableChangeListener(TableChangeListener tableChangeListener) {
 		tableChangeListeners.remove(tableChangeListener);
 	}
@@ -27,6 +35,10 @@ public class Services {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.pokercrash.game.model.IService#getGameTables()
+	 */
+	@Override
 	public GameTable[] getGameTables() {
 		GameTable[] gameTables = new GameTable[4];
 		for (int j = 0; j < gameTables.length; j++) {
@@ -35,17 +47,18 @@ public class Services {
 		return gameTables;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.pokercrash.game.model.IService#getUser()
+	 */
+	@Override
 	public User getUser() {
-		return new User("Juancho", "pass", 100);
+		return user;
 	}
 
-	/**
-	 * quedas sentado pero no jugando (estado reserved por tiempo limitado)
-	 * 
-	 * @param seatPos
-	 * @param i
-	 * @return true si queda en estado reserved
+	/* (non-Javadoc)
+	 * @see com.pokercrash.game.model.IService#tryReservedSeat(int, int)
 	 */
+	@Override
 	public boolean tryReservedSeat(int idGameTable, int seatPos) {
 		this.seatPos = seatPos;
 		getGameTable(idGameTable).getSeats().get(seatPos).empty= false;
@@ -58,12 +71,10 @@ public class Services {
 		return true;
 	}
 
-	/**
-	 * trata de sentar al usuario con el dinero
-	 * 
-	 * @param money
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.pokercrash.game.model.IService#trySeat(int, java.lang.String)
 	 */
+	@Override
 	public boolean trySeat(int idGameTable, String money) {
 		
 		getGameTable(idGameTable).getSeats().get(seatPos).stack = Float.valueOf(money);
@@ -73,19 +84,31 @@ public class Services {
 	}
 
 
-	/**
-	 * cancelar la reserva o deja el asiento libre 
-	 * @param idGameTable
-	 * @param seatPos
+	/* (non-Javadoc)
+	 * @see com.pokercrash.game.model.IService#cancelSeat(int, int)
 	 */
+	@Override
 	public void cancelSeat(int idGameTable, int seatPos) {
 		// TODO Auto-generated method stub
 	}
 
 	GameTable mockTable = new GameTable("fsdfsdfsd",3);
+	/* (non-Javadoc)
+	 * @see com.pokercrash.game.model.IService#getGameTable(int)
+	 */
+	@Override
 	public GameTable getGameTable(int idGameTable) {
 
 		return mockTable;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.pokercrash.game.model.IService#validateUser(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean validateUser(String nickname, String password) {
+		this.user = new User(nickname, password, 100);
+		return true;
 	}
 	
 	

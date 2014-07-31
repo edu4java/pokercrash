@@ -31,6 +31,8 @@ public class Login implements Screen {
 	private TextButton buttonPlay, buttonExit;
 	private BitmapFont white, black; 
 	private Pokercrash game;
+	private TextField nameText;
+	private TextField passwordText;
 	
 	public Login(Pokercrash game) {
 		this.game = game;
@@ -88,16 +90,16 @@ public class Login implements Screen {
 		Skin skin2 = new Skin(Gdx.files.internal("data/uiskin.json"));
 
 		Label nameLabel = new Label("Name:", labelStyle);
-		TextField nameText = new TextField("", skin2);
+		nameText = new TextField("", skin2);
 		Label addressLabel = new Label("Address:", labelStyle);
-		TextField addressText = new TextField("", skin2);	
+		passwordText = new TextField("", skin2);	
 
 		table.row().pad(20);
 		table.add(nameLabel);
 		table.add(nameText);
 		table.row().pad(20);
 		table.add(addressLabel);
-		table.add(addressText);
+		table.add(passwordText);
 		table.row().pad(20);
 		
 		
@@ -108,8 +110,16 @@ public class Login implements Screen {
 			
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				game.gotoLobby(); 
-				dispose();
+				boolean valid = game.getService().validateUser(nameText.getText(),passwordText.getText());
+				if (valid) {
+					game.gotoLobby(); 
+					dispose();
+				}else {
+					nameText.setText("");
+					passwordText.setText("");
+					//TODO mensaje de error user password 
+				}
+				
 			}
 		});
 		

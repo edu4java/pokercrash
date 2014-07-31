@@ -6,6 +6,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.pokercrash.game.model.IService;
 import com.pokercrash.game.model.Services;
 
 public class Pokercrash extends Game {
@@ -14,7 +15,7 @@ public class Pokercrash extends Game {
 	Texture img;
 	private Screen lobby;
 	private HashMap<Integer,TableScreen> tableScreens= new HashMap<Integer, TableScreen>();
-	private Services service;
+	private IService service;
 
 
 	@Override
@@ -39,7 +40,7 @@ public class Pokercrash extends Game {
 	}
 	
 
-	public Services getService() {
+	public IService getService() {
 		return service;
 	}
 

@@ -19,8 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.pokercrash.game.model.GameTable;
+import com.pokercrash.game.model.IService;
 import com.pokercrash.game.model.Seat;
-import com.pokercrash.game.model.Services;
 import com.pokercrash.game.model.TableChangeListener;
 import com.pokercrash.game.model.User;
 
@@ -33,7 +33,7 @@ public class TableScreen implements Screen {
 	private Stage stage;
 
 	private ArrayList<ActorSeat> actorSeats;
-	private Services service;
+	private IService service;
 	private int idGameTable;
 
 	public TableScreen(Pokercrash pokercrash,int idGameTable) {
