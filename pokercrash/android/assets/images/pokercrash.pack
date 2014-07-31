@@ -3,23 +3,37 @@ pokercrash.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-table-background
+tableBackGround
   rotate: false
-  xy: 1, 137
+  xy: 1, 195
   size: 800, 554
   orig: 800, 554
   offset: 0, 0
   index: -1
-card-0-0
+boton_Down
+  rotate: false
+  xy: 1, 117
+  size: 250, 76
+  orig: 250, 76
+  offset: 0, 0
+  index: -1
+boton_Up
   rotate: false
   xy: 1, 39
+  size: 250, 76
+  orig: 250, 76
+  offset: 0, 0
+  index: -1
+card-0-0
+  rotate: false
+  xy: 803, 653
   size: 71, 96
   orig: 71, 96
   offset: 0, 0
   index: -1
 player
   rotate: false
-  xy: 803, 655
+  xy: 253, 157
   size: 119, 36
   orig: 119, 36
   offset: 0, 0
