@@ -80,8 +80,7 @@ public class TableScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

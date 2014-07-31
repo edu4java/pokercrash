@@ -3,6 +3,9 @@ package com.pokercrash.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -22,6 +25,9 @@ public class Lobby implements Screen {
 	private Stage stage;
 	private List<GameTable> list;
 	
+	public Sprite fondoLobby;
+	public SpriteBatch batchFondoLobby;
+	
 
 	public Lobby(Pokercrash pokercrash) {
 		super();
@@ -32,6 +38,13 @@ public class Lobby implements Screen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		//////-----------------Agrego fondo al LOBBY------------------------///////
+		batchFondoLobby.begin();
+		fondoLobby.draw(batchFondoLobby);
+		batchFondoLobby.end();
+		/////////////-------------------------------------//////////////////////////
+		
 		Table.drawDebug(stage); // borrar cuando se termine
 		stage.act(delta);
 		stage.draw();
@@ -48,6 +61,13 @@ public class Lobby implements Screen {
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 		
+		///////////////Para fondo////////////////
+		batchFondoLobby = new SpriteBatch();		
+		Texture fondoLobbyTexture = new Texture(Gdx.files.internal("fondoRojo.jpg"));	
+		fondoLobby = new Sprite(fondoLobbyTexture);
+		fondoLobby.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		///////////////////////////////////////////////////////////////
+		
 		Skin skin2 = new Skin(Gdx.files.internal("data/uiskin.json"));
 
 		Table table = new Table();
@@ -57,6 +77,8 @@ public class Lobby implements Screen {
 		list = new List<GameTable>(skin2);
 		list.setItems(pokercrash.getModel().getGameTable());
 		ScrollPane scrollList = new ScrollPane(list);
+		
+		
 		
 		TextButton buttonExit = new TextButton("Exit", skin2);
 		buttonExit.addListener(new ChangeListener() {
@@ -74,8 +96,9 @@ public class Lobby implements Screen {
 				pokercrash.gotoMesa(gameTable.getId());
 				dispose();
 			}
-		});		
-				
+			
+			
+		});						
 		
 		table.row().expandX();
 		table.add(headline);
